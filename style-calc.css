@@ -14,8 +14,8 @@ body {
     margin: 25% auto;
     text-align: center;
     background-color: #000;
-    height: 500px;
-    width: 350px;
+    height: 380px;
+    width: 340px;
     border-radius: 10px;
     padding: 4%;
 }
@@ -26,10 +26,13 @@ body {
     width: 90%;
     background-color: #fff;
     border-radius: 10px;
+    text-align: right;
+    padding-right: 5px;
+    font-size: 20px;
 }
 
 .btn {
-    font-size: 16px;
+    font-size: 18px;
     background-color: #4B4F4C;
     color: #fff;
     margin: 6px;
