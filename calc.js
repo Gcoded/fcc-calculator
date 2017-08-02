@@ -11,26 +11,30 @@ function setupEventListener () {
     calculator.addEventListener('click', function(event) {
         var btnClicked = event.target;
         if (btnClicked.className === 'btn number') {
-            numArray.push(btnClicked.innerText);
-            displayBox.innerHTML = numArray.join('');
-            numHolder = parseInt(displayBox.innerHTML);
+            numArray.push(btnClicked.textContent);
+            displayBox.textContent = numArray.join('');
+            numHolder = parseFloat(displayBox.textContent);
         }
         if (btnClicked.className === 'btn operation') {
             numArray = [];
             finalArray.push(numHolder);
-            symbol = btnClicked.innerHTML;
+            symbol = btnClicked.textContent;
             finalArray.push(symbol);
             numHolder = 0;
         }
         if (btnClicked.id === 'equal') {
             finalArray.push(numHolder);
-            displayBox.innerHTML = executeMath(finalArray[0], finalArray[1], finalArray[2]);
+            displayBox.textContent = executeMath(finalArray[0], finalArray[1], finalArray[2]);
             finalArray = [];
+        }
+        if (btnClicked.id === 'ce') {
+            numArray = [];
+            displayBox.textContent = 0;
         }
         if (btnClicked.id === 'ac') {
             numArray = [];
             finalArray = [];
-            displayBox.innerHTML = 0;
+            displayBox.textContent = 0;
         }
 
     });
@@ -55,5 +59,8 @@ function executeMath (num1, oper, num2) {
             result = num1 - num2;
             break;
     }
+    result = Math.round(result * 10000) / 10000;
     return result;
 }
+
+
