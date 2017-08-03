@@ -38,6 +38,39 @@ function setupEventListener () {
         }
 
     });
+
+    window.addEventListener('keydown', function(event) {
+        var digit = /[0-9.]/;
+        var operator = /[\*\/\+\-]/;
+        var keyPressed = event.key;
+        if (digit.test(keyPressed)) {
+            numArray.push(keyPressed);
+            displayBox.textContent = numArray.join('');
+            numHolder = parseFloat(displayBox.textContent);
+        }
+        if (operator.test(keyPressed)) {
+            numArray = [];
+            finalArray.push(numHolder);
+            symbol = keyPressed;
+            finalArray.push(symbol);
+            numHolder = 0;
+        }
+        if (keyPressed === 'Enter' || keyPressed === '=') {
+            finalArray.push(numHolder);
+            displayBox.textContent = executeMath(finalArray[0], finalArray[1], finalArray[2]);
+            finalArray = [];
+        }
+        if (keyPressed === 'Backspace') {
+            numArray.splice(-1, 1);
+            displayBox.textContent = numArray.join('');
+            numHolder = parseFloat(displayBox.textContent);
+        }
+        if (keyPressed === 'Escape') {
+            numArray = [];
+            finalArray = [];
+            displayBox.textContent = 0;
+        }
+    });
 }
 
 setupEventListener();
@@ -47,6 +80,7 @@ function executeMath (num1, oper, num2) {
 
     switch (oper) {
         case 'x':
+        case '*':
             result = num1 * num2;
             break;
         case '/':
