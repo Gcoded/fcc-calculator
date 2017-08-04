@@ -41,6 +41,7 @@ function processEvent (event) {
     if (keySelected === 'Enter' || keySelected === '=') {
         finalArray.push(numHolder);
         displayBox.textContent = executeMath(finalArray[0], finalArray[1], finalArray[2]);
+        numHolder = parseFloat(displayBox.textContent);
         finalArray = [];
     }
     if (keySelected === 'Backspace' || keySelected === 'CE') {
