@@ -2,7 +2,6 @@
 var numArray = [];
 var finalArray = [];
 var numHolder = 0;
-var symbol = '';
 
 var displayBox = document.getElementById('display');
 var calculator = document.getElementById('calc-bod');
@@ -22,7 +21,7 @@ function processEvent (event) {
     if (event.key) {
         keySelected = event.key;
     }
-    else {
+    else if (event.target.tagName === "BUTTON") {
         keySelected = event.target.textContent;
     }
 
@@ -33,14 +32,12 @@ function processEvent (event) {
     }
     if (operator.test(keySelected)) {
         numArray = [];
-        finalArray.push(numHolder);
-        symbol = keySelected;
-        finalArray.push(symbol);
+        finalArray.push(numHolder, keySelected);
         numHolder = 0;
     }
     if (keySelected === 'Enter' || keySelected === '=') {
         finalArray.push(numHolder);
-        displayBox.textContent = executeMath(finalArray[0], finalArray[1], finalArray[2]);
+        displayBox.textContent = executeMath(finalArray);
         numHolder = parseFloat(displayBox.textContent);
         finalArray = [];
     }
@@ -56,10 +53,21 @@ function processEvent (event) {
     }
 }
 
-function executeMath (num1, oper, num2) {
-    var result = 0;
+function executeMath (mathArray) {
+    var result = 0, num1 = 0, num2 = 0;
+    var oper = '';
 
-    switch (oper) {
+    for (var i = 0; i < mathArray.length - 1; i += 2) {
+        if (i === 0) {
+            num1 = mathArray[i];
+        }
+        else {
+            num1 = result;
+        }
+        oper = mathArray[i+1];
+        num2 = mathArray[i+2];
+
+        switch (oper) {
         case 'x':
         case '*':
             result = num1 * num2;
@@ -73,7 +81,9 @@ function executeMath (num1, oper, num2) {
         case '-':
             result = num1 - num2;
             break;
+        }
     }
+
     result = Math.round(result * 10000) / 10000;
     return result;
 }
