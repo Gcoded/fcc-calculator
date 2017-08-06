@@ -1,5 +1,5 @@
 
-var numArray = [];
+var digitArray = [];
 var finalArray = [];
 var numHolder = 0;
 
@@ -26,12 +26,12 @@ function processEvent (event) {
     }
 
     if (digit.test(keySelected)) {
-        numArray.push(keySelected);
-        displayBox.textContent = numArray.join('');
+        digitArray.push(keySelected);
+        displayBox.textContent = digitArray.join('');
         numHolder = parseFloat(displayBox.textContent);
     }
     if (operator.test(keySelected)) {
-        numArray = [];
+        digitArray = [];
         finalArray.push(numHolder, keySelected);
         numHolder = 0;
     }
@@ -42,12 +42,12 @@ function processEvent (event) {
         finalArray = [];
     }
     if (keySelected === 'Backspace' || keySelected === 'CE') {
-        numArray.splice(-1, 1);
-        displayBox.textContent = numArray.join('');
+        digitArray.splice(-1, 1);
+        displayBox.textContent = digitArray.join('');
         numHolder = parseFloat(displayBox.textContent);
     }
     if (keySelected === 'Escape' || keySelected === 'AC') {
-        numArray = [];
+        digitArray = [];
         finalArray = [];
         displayBox.textContent = 0;
     }
