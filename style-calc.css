@@ -7,13 +7,13 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #A63446;
+    background-color: #a77a79;
 }
 
 #calc-bod {
     margin: 25% auto;
     text-align: center;
-    background-color: #000;
+    background-color: #4B4F57;
     height: 380px;
     width: 340px;
     border-radius: 10px;
@@ -33,7 +33,7 @@ body {
 
 .btn {
     font-size: 18px;
-    background-color: #4B4F4C;
+    background-color: #101010;
     color: #fff;
     margin: 6px;
     width: 20%;
