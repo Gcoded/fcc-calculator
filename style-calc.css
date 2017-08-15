@@ -18,6 +18,7 @@ body {
     width: 340px;
     border-radius: 10px;
     padding: 4%;
+    box-shadow: 10px 10px 40px #000;
 }
 
 #display {
@@ -37,6 +38,7 @@ body {
     color: #fff;
     margin: 6px;
     width: 20%;
+    box-shadow: 5px 5px 5px #101010;
 }
 
 a:link, a:visited {

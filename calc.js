@@ -37,7 +37,7 @@ function processEvent (event) {
     }
     if (keySelected === 'Enter' || keySelected === '=') {
         finalArray.push(numHolder);
-        displayBox.textContent = executeMath(finalArray);
+        displayBox.textContent = getFinalAnswer(finalArray);
         numHolder = parseFloat(displayBox.textContent);
         finalArray = [];
     }
@@ -53,21 +53,45 @@ function processEvent (event) {
     }
 }
 
-function executeMath (mathArray) {
-    var result = 0, num1 = 0, num2 = 0;
+function getFinalAnswer (mathArray) {
+    var answer = 0, num1 = 0, num2 = 0;
     var oper = '';
+    var operArray = ['x', '/'];
+    var mathArrayLength = mathArray.length;
 
-    for (var i = 0; i < mathArray.length - 1; i += 2) {
-        if (i === 0) {
-            num1 = mathArray[i];
+    for (var i = 0; i < mathArrayLength; i++) {
+
+        if(operArray.indexOf(mathArray[i]) !== -1) {
+            num1 = mathArray[i-1];
+            oper = mathArray[i];
+            num2 = mathArray[i+1];
+
+            answer = executeMath(num1, oper, num2);
+            mathArray.splice(i-1, 3, answer);
+        }
+    }
+
+    for (var j = 0; j < mathArray.length - 1; j += 2) {
+        if (j === 0) {
+            num1 = mathArray[j];
         }
         else {
-            num1 = result;
+            num1 = answer;
         }
-        oper = mathArray[i+1];
-        num2 = mathArray[i+2];
+        oper = mathArray[j+1];
+        num2 = mathArray[j+2];
 
-        switch (oper) {
+        answer = executeMath(num1, oper, num2);
+    }
+
+    finalAnswer = Math.round(answer * 10000) / 10000;
+    return finalAnswer;
+}
+
+function executeMath (num1, oper, num2) {
+    var result = 0;
+
+    switch (oper) {
         case 'x':
         case '*':
             result = num1 * num2;
@@ -81,10 +105,7 @@ function executeMath (mathArray) {
         case '-':
             result = num1 - num2;
             break;
-        }
     }
-
-    result = Math.round(result * 10000) / 10000;
     return result;
 }
 
