@@ -54,20 +54,20 @@ function processEvent (event) {
 }
 
 function getFinalAnswer (mathArray) {
-    var answer = 0, num1 = 0, num2 = 0;
+    var answer = 0, finalAnswer = 0, num1 = 0, num2 = 0;
     var oper = '';
-    var operArray = ['x', '/'];
+    var operArray = ['x', '*', '/'];
     var mathArrayLength = mathArray.length;
 
-    for (var i = 0; i < mathArrayLength; i++) {
+    for (var i = 1; i < mathArrayLength; i+=2) {
 
         if(operArray.indexOf(mathArray[i]) !== -1) {
             num1 = mathArray[i-1];
             oper = mathArray[i];
             num2 = mathArray[i+1];
-
             answer = executeMath(num1, oper, num2);
             mathArray.splice(i-1, 3, answer);
+            i -= 2;
         }
     }
 
