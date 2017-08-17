@@ -21,8 +21,13 @@ function processEvent (event) {
     if (event.key) {
         keySelected = event.key;
     }
-    else if (event.target.tagName === "BUTTON") {
-        keySelected = event.target.textContent;
+    if (event.target.tagName === "BUTTON") {
+        if (event.target.id === 'divide') {
+            keySelected = '/';
+        }
+        else {
+            keySelected = event.target.textContent;
+        }
     }
 
     if (digit.test(keySelected)) {
@@ -56,12 +61,10 @@ function processEvent (event) {
 function getFinalAnswer (mathArray) {
     var answer = 0, finalAnswer = 0, num1 = 0, num2 = 0;
     var oper = '';
-    var operArray = ['x', '*', '/'];
-    var mathArrayLength = mathArray.length;
+    var multOrDiv = ['x', '*', '/'];
 
-    for (var i = 1; i < mathArrayLength; i+=2) {
-
-        if(operArray.indexOf(mathArray[i]) !== -1) {
+    for (var i = 1; i < mathArray.length; i+=2) {
+        if(multOrDiv.indexOf(mathArray[i]) !== -1) {
             num1 = mathArray[i-1];
             oper = mathArray[i];
             num2 = mathArray[i+1];
