@@ -31,9 +31,13 @@ function processEvent (event) {
     }
 
     if (digit.test(keySelected)) {
-        digitArray.push(keySelected);
-        displayBox.textContent = digitArray.join('');
-        numHolder = parseFloat(displayBox.textContent);
+        if (digitArray.length < 10) {
+            if (keySelected !== '.' || (keySelected === '.' && digitArray.indexOf('.') === -1)) {
+                digitArray.push(keySelected);
+                displayBox.textContent = digitArray.join('');
+                numHolder = parseFloat(displayBox.textContent);
+            }
+        }
     }
     if (operator.test(keySelected)) {
         digitArray = [];
@@ -87,7 +91,7 @@ function getFinalAnswer (mathArray) {
         answer = executeMath(num1, oper, num2);
     }
 
-    finalAnswer = Math.round(answer * 10000) / 10000;
+    finalAnswer = Math.round(answer * 10000000) / 10000000;
     return finalAnswer;
 }
 
